@@ -11,7 +11,7 @@ export default class Search {
         try{
             const res = await axios(`${proxy}${url}?key=${key}&q=${this.query}`);
             this.result = res.data.recipes; 
-            //console.log(this.result); - Displays Data 
+            // console.log(this.result);
         } catch(error){
             console.log(error);
         }

@@ -1,12 +1,18 @@
 import Search from './models/Search';
 
-/* Global State of The App
+const search = new Search('pizza');
+console.log(search);
+search.getResults();
+
+/*
+ Global State of The App
 * - Search Object 
 * - Current Recipe Object
 * - Shopping List Object
 * - Liked Recipes 
 */
-// const state = {};
+
+const state = {};
 
 const controlSearch = async () => {
     //1) Get query from view 
@@ -22,12 +28,12 @@ const controlSearch = async () => {
     try{
         await state.search.getResults(); //Here we use await, because we need the results FIRST before we can display to UI.
     
-        //5) Render results on UI
-        console.log(state.search.result);
-    } catch(error){
-        console.log(error);
-        }
-    }
+    //5) Render results on UI
+    //     console.log(state.search.result);
+    // } catch(error){
+    //     console.log(error);
+    //     }
+    // }
 }
 
 document.querySelector('.search').addEventListener('submit', e => {
