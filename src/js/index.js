@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
@@ -47,3 +48,25 @@ elements.searchResPages.addEventListener('click', e => {
         searchView.renderResults(state.search.result, goToPage);
     }
 });
+
+/*
+RECIPE CONTROLLER
+*/
+const controlRecipe = () => {
+    //get ID from URL
+    const id = window.location.hash.replace('#', '');
+    console.log(id);
+
+    if(id) {
+    //Prepare UI for changes
+
+    //Create new recipe object 
+
+    //Get recipe data 
+
+    //Calculate servings and time
+
+    //Render Recipe
+    }
+}
+window.addEventListener('hashChange', controlRecipe);
