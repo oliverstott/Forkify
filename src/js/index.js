@@ -26,12 +26,17 @@ const controlSearch = async () => {
     renderLoader(elements.searchRes);
 
     //4) Search for Recipes 
-    
+    try{
         await state.search.getResults(); //Here we use await, because we need the results FIRST before we can display to UI.
     
     //5) Render results on UI
     clearLoader();
     searchView.renderResults(state.search.result);
+
+        } catch (err) {
+            alert('something wrong with the search');
+            clearLoader();
+        }
     }
 }
 
@@ -52,21 +57,28 @@ elements.searchResPages.addEventListener('click', e => {
 /*
 RECIPE CONTROLLER
 */
-const controlRecipe = () => {
+const controlRecipe = async () => {
     //get ID from URL
-    const id = window.location.hash.replace('#', '');
+    const id = window.location.hash.replace("#", '');
     console.log(id);
 
     if(id) {
-    //Prepare UI for changes
-
-    //Create new recipe object 
-
-    //Get recipe data 
-
-    //Calculate servings and time
-
-    //Render Recipe
+        //Prepare UI for changes
+    
+        //Create new recipe object 
+        state.recipe = new Recipe(id);
+        try {
+        //Get recipe data 
+        await state.recipe.getRecipe();
+        //Calculate servings and time
+        state.recipe.calcTime();
+        state.recipe.calcServings();
+        //Render Recipe
+        console.log(state.recipe);
+        } catch (err) {
+            alert('error processing recipe');
+        }
     }
-}
-window.addEventListener('hashChange', controlRecipe);
+};
+
+['hashChange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
