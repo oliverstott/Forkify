@@ -38,7 +38,7 @@ const controlSearch = async () => {
             clearLoader();
         }
     }
-}
+};
 
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -58,10 +58,8 @@ elements.searchResPages.addEventListener('click', e => {
 RECIPE CONTROLLER
 */
 const controlRecipe = async () => {
+    const id = window.location.hash.replace('#', '');
     //get ID from URL
-    const id = window.location.hash.replace("#", '');
-    console.log(id);
-
     if(id) {
         //Prepare UI for changes
     
@@ -80,5 +78,6 @@ const controlRecipe = async () => {
         }
     }
 };
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
-['hashChange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
