@@ -8,8 +8,15 @@ export const clearInput = () => {
 export const clearResults = () => {
     elements.searchResultList.innerHTML = '';
     elements.searchResPages.innerHTML = '';
+};
 
-}
+export const highlightSelected = id => {
+    const resultsArr = Array.from(document.querySelectorAll('.results__link'));
+    resultsArr.forEach(el => {
+        el.classList.remove('results__link--active');
+    });
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+};
 
 const limitRecipeTitle = (title, limit = 17) => {
     const newTitle = [];
@@ -23,7 +30,7 @@ const limitRecipeTitle = (title, limit = 17) => {
         return `${newTitle.join(' ')} ...`;
     }
     return title;
-}
+};
 
 const renderRecipe = recipe => {
     const markup = `<li>
@@ -39,6 +46,7 @@ const renderRecipe = recipe => {
 </li>`;
     elements.searchResultList.insertAdjacentHTML('beforeend', markup);
 };
+
 const createButton = (page, type) => `
     <button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
     <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
