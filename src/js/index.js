@@ -103,6 +103,7 @@ const controlRecipe = async () => {
 
 //TESTING 
 state.likes = new Likes();
+likesView.toggleLikeMenu(state.likes.getNumLikes());
 
 
 const controlList = () => {
@@ -152,7 +153,8 @@ const controlList = () => {
             likesView.toggleLikeBtn(true);
             
             //Add like to UI list
-            console.log(state.likes);
+            likesView.renderLike(newLike);
+            
         //User has liked current recipe 
     } else {
             //Remove like to state
@@ -162,8 +164,9 @@ const controlList = () => {
             likesView.toggleLikeBtn(false);
            
             //Remove like to UI list
-            console.log(state.likes);
+            likesView.deleteLike(currentID);
         }
+        likesView.toggleLikeMenu(state.likes.getNumLikes());
     };
 
 //Handling recipe button clicks
