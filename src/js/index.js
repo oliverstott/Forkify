@@ -101,11 +101,6 @@ const controlRecipe = async () => {
 
 // LIST CONTROLLER
 
-//TESTING 
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
-
-
 const controlList = () => {
     //Create new list IF there is none yet
     if(!state.list) state.list = new List();
@@ -168,6 +163,22 @@ const controlList = () => {
         }
         likesView.toggleLikeMenu(state.likes.getNumLikes());
     };
+
+//Restore liked recipes on page load
+
+window.addEventListener('load', () => {
+    //Create empty likes object
+    state.likes = new Likes();
+
+    //Restore likes from local storage 
+    state.likes.readStorage();
+    
+    //Toggle menu button 
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+    //Render liked recipes
+    state.likes.likes.forEach(like => likesView.renderLike(like));
+});
 
 //Handling recipe button clicks
 elements.recipe.addEventListener('click', e => {
